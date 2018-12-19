@@ -11,59 +11,59 @@
 
        }
 
-       public function setParams($statment,$parametres = array()){
+       
 
-       	   foreach ($parametres as $key => $value) {
+      private function setParams($statment, $parameters = array()){
+          
 
-          	  $stm->setParam($key,$value);
-          	
-          }
-
+          foreach ($parameters as $key => $value) { 
 
 
-
-       }
-
-
-        private function setParam($statment,$key,$value){
-
-
-                $statment -> bindParam($key,$value);
+             $this-> setParam($statment,$key,$value);
+         
+         }
 
 
 
+      }
+
+      private function setParam($statment,$key,$value){
+
+              $statment -> bindParam($key,$value);
+
+      }
 
 
-       }
 
-
-       public function query($rawQuery,$params = array()){
-
-
-          $stmt = $this -> conn->prepare($rawQuery);
-
-          $this-> setParams($stmt,$params);
-
-          $stmt -> execute();
-
-          return $stmt;
-
+      public function query($rawQuery,$params = array()){
          
 
+         $stmt = $this->conn->prepare($rawQuery);
 
-       }
+         $this->setParams($stmt,$params);
 
-       public function select($rawQuery,$params = array()):array{
+         
+        $stmt -> execute();
 
-            $stmt  = $this -> query($rawQuery,$params);
-            
-           return   $stmt -> fetchAll(PDO::FETCH_ASSOC);
-
-
+        return $stmt;
 
 
+      }
 
-       }
+      public function select($rawQuery,$params = array()):array{ 
+
+
+           $stmt =   $this-> query($rawQuery,$params);
+
+
+          return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+
+
+      }
 
 
 
