@@ -243,6 +243,30 @@
       }
 
 
+      public function delete(){
+
+
+         $sql  = new Sql();
+
+         $sql -> query("delete from  tb_usuarios where idusuario = :id",array(
+                
+                "id"=>$this->getIdUsuario()
+
+
+
+
+         ));
+
+         $this ->setIdUsuario(0);
+         $this ->setDesLogin("");
+         $this ->setDesSenha("");
+         $this ->setDtCadastro(new DateTime());
+
+
+
+      }
+
+
 
   }
 

@@ -40,10 +40,20 @@
   //echo $aluno;
 
 
-  $usuario = new Usuario();
+  /*  $usuario = new Usuario();
   $usuario-> loadById(17);
 
   $usuario-> update("professor","diqwjqwi");
+   
+  echo $usuario;   */ 
+
+
+
+  $usuario = new Usuario();
+
+  $usuario-> loadById(7);
+
+  $usuario-> delete();
 
   echo $usuario;
 
