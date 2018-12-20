@@ -85,14 +85,56 @@
 
                 $row  = $results[0];
 
-                $this-> setIdUsuario($row['idusuario']);
-                $this-> setDesLogin($row['deslogin']);
-                $this-> setDesSenha($row['dessenha']);
-                $this-> setDtCadastro(new DateTime($row['dtcadastro']));
-
+                 $this-> setData($row);
 
 
             }
+
+
+
+      }
+
+
+      public function __construct($login = "",$senha = ""){
+
+           $this-> setDesLogin = $login;
+           $this-> setDesSenha = $senha;
+
+
+      }
+
+      public function insert(){
+          
+          $sql  = new Sql();
+
+          $results = $sql->select("CALL sp_usuarios_insert(:Login, :Senha)",array(
+                 "Login"=> $this->getDesLogin(),
+                 "Senha"=> $this->getDesSenha()
+
+
+
+          ));
+
+
+           if(count($results) > 0){
+                  
+                  $this-> setData($results[0]);
+
+
+           }
+
+          
+
+
+
+      }
+
+      public function setData($dados){
+
+           $this-> setIdUsuario($dados["idusuario"]);
+                $this-> setDesLogin($dados["deslogin"]);
+                $this-> setDesSenha($dados['dessenha']);
+                $this-> setDtCadastro(new DateTime($dados['dtcadastro']));
 
 
 
@@ -137,10 +179,7 @@
 
                 $row  = $results[0];
 
-                $this-> setIdUsuario($row['idusuario']);
-                $this-> setDesLogin($row['deslogin']);
-                $this-> setDesSenha($row['dessenha']);
-                $this-> setDtCadastro(new DateTime($row['dtcadastro']));
+              $this-> setData($row);
 
 
 
@@ -174,6 +213,31 @@
 
 
             
+
+
+      }
+
+      public function update($login,$senha){
+
+
+
+        $this-> setDesLogin($login);
+        $this-> setDesSenha($senha);
+
+        $sql = new Sql();
+
+        $sql -> query("UPDATE tb_usuarios set deslogin = :Login, dessenha = :senha WHERE idusuario = :id",array(
+              
+              ":Login"=> $this->getDesLogin(),
+              ":senha"=> $this->getDesSenha(),
+              ":id"=> $this->getIdUsuario()
+
+
+
+        ));
+
+
+
 
 
       }

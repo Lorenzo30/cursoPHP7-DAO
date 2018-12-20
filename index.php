@@ -24,10 +24,27 @@
 
 
   //Carrega um usuario usando login e senha 
-  $Usuario = new Usuario();
+  //$Usuario = new Usuario();
 
 
-  $Usuario->login("user",);
-  echo $Usuario;
+  //$Usuario->login("user",);
+  //echo $Usuario;
+
+  //$aluno = new Usuario();
+
+  //$aluno->setDeslogin("lorenzo");
+  //$aluno -> setDesSenha("fefkepfk");
+
+  //$aluno-> insert();
+
+  //echo $aluno;
+
+
+  $usuario = new Usuario();
+  $usuario-> loadById(17);
+
+  $usuario-> update("professor","diqwjqwi");
+
+  echo $usuario;
 
 ?> 
